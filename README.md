@@ -1,2 +1,3 @@
 # BUAA_2020_CO
+## 从CPU部分(P3)开始，代码见各个分支
 ### [P3](https://github.com/mr823929973/BUAA_2020_MIPS_CPU/tree/p3) (TO DO)
