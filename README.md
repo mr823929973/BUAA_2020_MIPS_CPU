@@ -6,11 +6,11 @@
 
 + **addu**
 + **subu**
-+ **ori **
-+ **lw **
++ **ori**
++ **lw**
 + **sw**
 + **beq**
-+ **lui **
++ **lui**
 + **sll**
 + **nop**
 
