@@ -154,7 +154,7 @@
 
 + (下文详述)
 
-  先放一张网上的图（![img](https://cscore.net.cn/assets/courseware/v1/5b9cb88947ee44745aef98b41827389a/asset-v1:Internal+B3I062410+2020_T1+type@asset+block/P3_L0_T3_0.png)
+  先放一张网上的图（![img](/home/buaa-city/co/P3_L0_T3_0.png)
 
 ### （三）重要机制实现方法
 
@@ -175,11 +175,11 @@
 
   
 
-  ![image-20201112205538191](/home/buaa-city/.config/Typora/typora-user-images/image-20201112205538191.png)
+  ![image-20201112205538191](/home/buaa-city/co/image-20201112205538191.png)
 
 对于每个控制信号，采用如下图的处理方式
 
-![image-20201112205637661](/home/buaa-city/.config/Typora/typora-user-images/image-20201112205637661.png)
+![image-20201112205637661](/home/buaa-city/co/image-20201112205637661.png)
 
 后续如需增加指令，则只需增加一个与门，在相应控制信号或门增加标签，或增加新的控制信号（或门）即可。
 
