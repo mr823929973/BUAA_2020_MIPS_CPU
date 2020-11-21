@@ -4,6 +4,7 @@ module alu(
            input [31:0] srcA,
            input [31:0] srcB,
            input [2:0] ALUop,
+           input [4:0] s,
            output zero,
            output [31:0] ALUout
        );
@@ -21,15 +22,15 @@ always @(*) begin
         3'b010:
             ALUResult = srcA + srcB;
         3'b011:
-            ;
+            ALUResult = srcB << s;
         3'b100:
             ALUResult = srcA & (~srcB);
         3'b101:
             ALUResult = srcA | (~srcB);
         3'b110:
-            ALUResult = srcA - (~srcB);
+            ALUResult = srcA - srcB;
         3'b111:
-            ;
+            ALUResult = srcB << 16;
         default:
             ;
     endcase
