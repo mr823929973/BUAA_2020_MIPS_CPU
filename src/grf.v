@@ -3,7 +3,8 @@
 module grf(
            input clk,
            input reset,
-           inout writeEnable,
+           input writeEnable,
+           input [31:0] PCReg,
            input [4:0] readReg1,
            input [4:0] readReg2,
            input [4:0] writeReg,
@@ -28,9 +29,17 @@ always @(posedge clk) begin
         end
     end
     else begin
-        
+        if(writeEnable) begin
+            $display("@%h: $%d <= %h", PCReg, writeReg, writeData);
+            if(writeReg != 5'b0) begin
+                register[writeReg] <= writeData;
+            end
+        end
     end
 end
+
+assign readData1 = (readReg1 == 0) ? 32'b0 :register[readReg1];
+assign readData2 = (readReg2 == 0) ? 32'b0 :register[readReg2];
 
 
 endmodule
