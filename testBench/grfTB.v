@@ -1,4 +1,4 @@
-`include "./src/grf.v"
+`include "src/grf.v"
 
 `timescale 1ns / 1ps
 
