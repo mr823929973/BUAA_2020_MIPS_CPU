@@ -40,14 +40,16 @@ wire [31:0] grfWD;
 
 /*ifu*/
 wire [25:0] jumpAddr;
+wire isBranch;
 assign jumpAddr = instructure[25:0];
+assign isBranch = Branch & ALUZero;
 
 ifu IFU(
         //in
         .clk(clk),
         .reset(reset),
         .PC(PC),
-        .isBranch(ALUZero & Branch),
+        .isBranch(isBranch),
         .branchAddr(SignImm),
         .isJump(Jump),
         .jumpAddr(jumpAddr),
@@ -115,7 +117,7 @@ alu ALU(
         .srcB(aluSrcMuxOut),
         .s(s),
         .ALUop(ALUop),
-        .zero(ALUzero),
+        .zero(ALUZero),
         .ALUout(ALUResult)
     );
 
