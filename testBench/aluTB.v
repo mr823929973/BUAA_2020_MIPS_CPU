@@ -1,4 +1,4 @@
-`include "src/alu.v"
+`include "../src/alu.v"
 
 `timescale 1ns / 1ps
 

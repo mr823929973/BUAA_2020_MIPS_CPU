@@ -1,4 +1,4 @@
-`include "src/ifu.v"
+`include "../src/ifu.v"
 
 `timescale 1ns / 1ps
 
