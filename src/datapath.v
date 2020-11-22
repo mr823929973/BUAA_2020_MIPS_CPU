@@ -66,7 +66,6 @@ wire [4:0] regDstMuxOut;
 assign rs = instructure[25:21];
 assign rt = instructure[20:16];
 assign rd = instructure[15:11];
-assign s = instructure[10:6];
 
 mux_5b regDstMux(
            .in0(rt),
