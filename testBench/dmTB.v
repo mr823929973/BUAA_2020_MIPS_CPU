@@ -4,7 +4,7 @@
 
 
 
-module grfTB;
+module dmTB;
 
 //input
 reg clk;
@@ -31,7 +31,7 @@ dm UUT(
 
 initial begin
     $dumpfile("dm_test.vcd");
-    $dumpvars(0,grfTB);
+    $dumpvars(0,dmTB);
     clk = 0;
     MemWrite =1;
     //start test

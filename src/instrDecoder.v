@@ -16,7 +16,7 @@ always @(*) begin
         case (Funct)
             6'b100001:
                 instr_reg = `addu;
-            6'b100001:
+            6'b100011:
                 instr_reg = `subu;
             6'b001000:
                 instr_reg = `jr;  
