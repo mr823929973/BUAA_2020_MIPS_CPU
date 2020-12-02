@@ -1,6 +1,6 @@
-# P4
+# P5
 
-### verilog单周期CPU
+### verilog流水线CPU(一)
 
 CPU代码在./src/目录下,TestBench代码在./testBench/目录下
 
@@ -17,5 +17,6 @@ CPU代码在./src/目录下,TestBench代码在./testBench/目录下
 + **lui**
 + **sll**
 + **jal**
++ **j**
 + **jr**
 + **nop**

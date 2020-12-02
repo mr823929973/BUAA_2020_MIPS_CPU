@@ -1,10 +1,10 @@
-# P4_Verilog单周期实验文档
+# P5_Verilog流水线(一)实验文档
 
 ## 一、CPU设计方案综述
 
 ### （一）总体设计概述
 
-​	本CPU为Logisim实现的单周期MIPS - CPU，支持的指令集包含**{addu, subu, ori, lw, sw, beq, lui, jal, jr,nop,sll}**。为了实现这些功能，CPU主要包含了IFU、GRF、ALU、DM、EXT、Controller、Splitter等模块。
+​	本CPU为Verilog实现的流水线MIPS - CPU，支持的指令集包含**{addu, subu, ori, lw, sw, beq, lui, j, jal, jr, nop,sll}**
 
 ### （二）关键模块定义
 
