@@ -110,6 +110,19 @@ always @(*) begin
             Jump = 0;
             JumpToReg = 0;
         end
+        `j: begin
+            RegWrite = 0;
+            RegDst = 0;
+            ALUSrc = 0;
+            Branch = 0;
+            MemWrite = 0;
+            MemtoReg = 0;
+            EXTop = 0;
+            ALUop = 3'b000;
+            writeR31 = 0;
+            Jump = 1;
+            JumpToReg = 0;
+        end
         `jal: begin
             RegWrite = 1;
             RegDst = 0;

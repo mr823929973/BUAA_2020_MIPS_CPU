@@ -2,6 +2,8 @@
 `define CONSTANT_VH
 
 `define PC_START 32'h0000_3000
+`define ROM_MAX 1023
+`define RAM_MAX 1023
 
 
 `endif

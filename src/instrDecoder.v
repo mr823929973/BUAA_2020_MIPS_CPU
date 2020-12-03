@@ -3,8 +3,8 @@
 `timescale 1ns / 1ps
 
 module instrDecoder (
-           input [31:0] instructure_in,
-           output [5:0] instrCode_out
+           input wire [31:0] instructure_in,
+           output wire [5:0] instrCode_out
        );
 
 reg [5:0] instr_reg;
@@ -41,6 +41,8 @@ always @(*) begin
             instr_reg = `lui;
         6'b000011:
             instr_reg = `jal;
+        6'b000010:
+            instr_reg = `j;
         default:
             ;
     endcase
