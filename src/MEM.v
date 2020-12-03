@@ -13,6 +13,9 @@ module MEM (
            input wire [31:0] alu_result_in,
            input wire [31:0] reg_read_data2_in,
 
+           input wire forward_rt_src,
+           input wire [31:0] forward_data_WB,
+
            output wire [31:0] pc_out,
            output wire [31:0] instructure_out,
            output wire [5:0] instr_code_out,
@@ -40,13 +43,26 @@ ctrlor CTR(
            .ALUop()
        );
 
+wire [31:0] forward_rt_mux_out;
+
+mux_32b forward_rt_mux(
+            .in0(reg_read_data2_in),
+            .in1(forward_data_WB),
+            .sel(forward_rt_src),
+
+            .out(forward_rt_mux_out)
+        );
+
+
 dm DM(
+       //in
        .clk(clk),
        .reset(reset),
        .MemWrite(mem_write_en),
        .PC(pc_in),
        .addr(alu_result_in),
-       .writeData(reg_read_data2_in),
+       .writeData(forward_rt_mux_out),
+       //out
        .readData(mem_read_data)
    );
 

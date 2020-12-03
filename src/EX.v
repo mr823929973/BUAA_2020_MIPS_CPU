@@ -13,6 +13,11 @@ module EX (
            input wire [31:0] reg_read_data1_in,
            input wire [31:0] reg_read_data2_in,
            input wire [31:0] extend_imme_in,
+
+           input wire [1:0] forward_rs_src,
+           input wire [1:0] forward_rt_src,
+           input wire [31:0] forward_data_MEM,
+           input wire [31:0] forward_data_WB,
            
            output wire [31:0] pc_out,
            output wire [31:0] instructure_out,
@@ -22,7 +27,7 @@ module EX (
        );
 
 wire [2:0] alu_op;
-wire alu_src;
+wire alu_src,write_r31;
 wire [31:0] alu_result;
 
 
@@ -38,7 +43,7 @@ ctrlor CTR(
            .MemWrite(),
            .MemtoReg(),
            .EXTop(),
-           .writeR31(),
+           .writeR31(write_r31),
            .Jump(),
            .JumpToReg(),
            .ALUop(alu_op)
@@ -55,16 +60,53 @@ mux_32b alu_src_mux(
             .out(alu_src_mux_out)
         );
 
+wire [31:0] forward_rs_mux_out,forward_rt_mux_out;
+
+
+mux_32b_4 forward_rs_mux(
+            .in0(reg_read_data1_in),
+            .in1(forward_data_MEM),
+            .in2(forward_data_WB),
+            .in3(32'hxxxx_xxxx),
+            .sel(forward_rs_src),
+
+            .out(forward_rs_mux_out)
+        );
+
+mux_32b_4 forward_rt_mux(
+            .in0(alu_src_mux_out),
+            .in1(forward_data_MEM),
+            .in2(forward_data_WB),
+            .in3(32'hxxxx_xxxx),
+            .sel(forward_rt_src),
+
+            .out(forward_rt_mux_out)
+        );
+
+wire[31:0] alu_out;
+
 alu ALU(
         //in
-        .srcA(reg_read_data1_in),
-        .srcB(alu_src_mux_out),
+        .srcA(forward_rs_mux_out),
+        .srcB(forward_rt_mux_out),
         .s(s),
         .ALUop(alu_op),
         //out
         .zero(),
-        .ALUout(alu_result)
+        .ALUout(alu_out)
     );
 
+mux_32b alu_result_mux(
+            .in0(alu_out),
+            .in1(pc_in + 8),
+            .sel(write_r31),
+            .out(alu_result)
+        );
+
+assign pc_out = pc_in;
+assign instructure_out = instructure_in;
+assign instr_code_out = instr_code_in;
+assign reg_read_data2_out = reg_read_data2_in;
+assign alu_result_out = alu_result;
 
 endmodule

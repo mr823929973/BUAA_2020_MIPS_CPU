@@ -5,6 +5,7 @@
 module IF(
            input wire clk,
            input wire reset,
+           input wire stall,
            input wire isBranch,
            input wire [31:0] branchAddr,
            input wire isJump,
@@ -27,6 +28,9 @@ end
 always @(posedge clk) begin
     if(reset) begin
         PC_Reg <= `PC_START;
+    end
+    else if(stall) begin
+        PC_Reg <= PC_Reg;
     end
     else if(isBranch) begin
         PC_Reg <= PC_Reg + 4 + $signed($signed(branchAddr)<<$signed(2));

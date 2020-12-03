@@ -38,8 +38,13 @@ always @(posedge clk) begin
     end
 end
 
-assign readData1 = (readReg1 == 0) ? 32'b0 :register[readReg1];
-assign readData2 = (readReg2 == 0) ? 32'b0 :register[readReg2];
+assign readData1 = (readReg1 == 0) ? 32'b0 :
+                   (readReg1 == writeReg && writeEnable ==1) ? writeData:
+                     register[readReg1];
+assign readData2 = (readReg2 == 0) ? 32'b0 : 
+                    (readReg2 == writeReg && writeEnable ==1) ? writeData:
+                    register[readReg2];
 
 
 endmodule
+ 

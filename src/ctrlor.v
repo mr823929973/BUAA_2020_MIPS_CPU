@@ -2,7 +2,7 @@
 `timescale 1ns / 1ps
 
 module ctrlor (
-           input [5:0] instr,
+           input wire [5:0] instr,
            output reg RegWrite,
            output reg RegDst,
            output reg ALUSrc,

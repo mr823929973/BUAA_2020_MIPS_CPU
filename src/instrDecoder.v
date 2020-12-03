@@ -1,3 +1,6 @@
+`ifndef INSTRDECODER_V
+`define INSTRDECODER_V
+
 `include "instr.vh"
 
 `timescale 1ns / 1ps
@@ -49,3 +52,5 @@ always @(*) begin
 end
 
 endmodule
+
+`endif

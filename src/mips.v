@@ -1,9 +1,13 @@
+
+
 `timescale 1ns / 1ps
 
 module mips (
-           input clk,
-           input reset
+           input wire clk,
+           input wire reset
        );
+
+
 
 
 endmodule

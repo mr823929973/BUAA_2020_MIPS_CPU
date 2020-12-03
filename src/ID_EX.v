@@ -6,6 +6,7 @@
 module ID_EX (
            input wire clk,
            input wire reset,
+           input wire stall,
            input wire[31:0] pc_in,
            input wire[31:0] instructure_in,
            input wire[5:0] instr_code_in,
@@ -44,7 +45,7 @@ initial begin
 end
 
 always @(posedge clk) begin
-    if(reset) begin
+    if(reset || stall) begin
         pc <= `PC_START;
         instructure <= 32'h0000_0000;
         instr_code <= `nop;

@@ -15,6 +15,10 @@ module ID (
            input wire[4:0] reg_write_addr,
            input wire[31:0] reg_write_data,
 
+           input wire forward_rs_src,
+           input wire forward_rt_src,
+           input wire [31:0] forward_data_MEM,
+
            output wire[31:0] pc_out,
            output wire[31:0] instructure_out,
            output wire[5:0] instr_code_out, 
@@ -58,6 +62,8 @@ assign rs = instructure_in[25:21];
 assign rt = instructure_in[20:16];
 
 
+wire [31:0] grf_out_data1,grf_out_data2;
+
 grf GRF(
         //in
         .clk(clk),
@@ -69,8 +75,8 @@ grf GRF(
         .writeReg(reg_write_addr),
         .writeData(reg_write_data),
         //out
-        .readData1(reg_read_data1),
-        .readData2(reg_read_data2)
+        .readData1(grf_out_data1),
+        .readData2(grf_out_data2)
     );
 
 wire [15:0] imme;
@@ -86,9 +92,26 @@ ext EXT(
     );
 
 
+mux_32b forward_rs_mux(
+            .in0(grf_out_data1),
+            .in1(forward_data_MEM),
+            .sel(forward_rs_src),
+
+            .out(reg_read_data1)
+        );
+
+mux_32b forward_rt_mux(
+            .in0(grf_out_data2),
+            .in1(forward_data_MEM),
+            .sel(forward_rt_src),
+
+            .out(reg_read_data2)
+        );
+
+
 assign pc_out = pc_in;
-assign instructure_in = instructure_out;
-assign instr_code_in = instr_code_out;
+assign instructure_out = instructure_in;
+assign instr_code_out = instr_code_in;
 assign reg_read_data1_out = reg_read_data1;
 assign reg_read_data2_out = reg_read_data2;
 assign extend_imme_out = extend_imme;
@@ -107,3 +130,4 @@ assign jump_reg_addr = reg_read_data1;
 
 
 endmodule
+  
