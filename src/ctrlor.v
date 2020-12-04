@@ -60,6 +60,19 @@ always @(*) begin
             Jump = 0;
             JumpToReg = 0;
         end
+        `andi: begin
+            RegWrite = 1;
+            RegDst = 0;
+            ALUSrc = 1;
+            Branch = 0;
+            MemWrite = 0;
+            MemtoReg = 0;
+            EXTop = 1;
+            ALUop = 3'b000;
+            writeR31 = 0;
+            Jump = 0;
+            JumpToReg = 0;
+        end
         `lw: begin
             RegWrite = 1;
             RegDst = 0;

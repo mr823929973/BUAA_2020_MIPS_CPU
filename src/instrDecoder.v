@@ -34,6 +34,8 @@ always @(*) begin
         endcase
         6'b001101:
             instr_reg = `ori;
+        6'b001100:
+            instr_reg = `andi;
         6'b100011:
             instr_reg = `lw;
         6'b101011:

@@ -18,4 +18,6 @@
 `define jal  6'd9
 `define jr   6'd10
 
+`define andi 6'd11
+
 `endif

@@ -116,6 +116,14 @@ always @(*) begin
             t_use1 = 1;
             t_use2 = 1;
         end
+        `andi: begin
+            r_new = rt;
+            r_use1 = rs;
+            r_use2 = 0;
+            t_new = 2;
+            t_use1 = 1;
+            t_use2 = 0;
+        end
         default: begin
             r_new = 0;
             r_use1 = 0;
