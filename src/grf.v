@@ -30,8 +30,8 @@ always @(posedge clk) begin
     end
     else begin
         if(writeEnable) begin
-            $display("%d@%h: $%d <= %h", $time, PCReg, writeReg, writeData);
             if(writeReg != 5'b0) begin
+                 $display("%d@%h: $%d <= %h", $time, PCReg, writeReg, writeData);
                 register[writeReg] <= writeData;
             end
         end
