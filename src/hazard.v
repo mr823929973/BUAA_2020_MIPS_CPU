@@ -92,11 +92,11 @@ assign forward_rs_ID = (MEM_t_new == 0 && ID_r_use1 != 0 && MEM_r_new == ID_r_us
 assign forward_rt_ID = (MEM_t_new == 0 && ID_r_use2 != 0 && MEM_r_new == ID_r_use2) ? 1 : 0;
 
 //MEM and WB TO EX
-assign forward_rs_EX = (WB_t_new == 0 && EX_r_use1 != 0 && WB_r_new == EX_r_use1) ? 2 :
-                        (MEM_t_new == 0 && EX_r_use1 != 0 && MEM_r_new == EX_r_use1) ? 1 : 0;
+assign forward_rs_EX = (MEM_t_new == 0 && EX_r_use1 != 0 && MEM_r_new == EX_r_use1) ? 1:
+                        (WB_t_new == 0 && EX_r_use1 != 0 && WB_r_new == EX_r_use1)? 2 : 0;
 
-assign forward_rt_EX = (WB_t_new == 0 && EX_r_use2 != 0 && WB_r_new == EX_r_use2) ? 2 :
-                        (MEM_t_new == 0 && EX_r_use2 != 0 && MEM_r_new == EX_r_use2) ? 1 : 0;
+assign forward_rt_EX = (MEM_t_new == 0 && EX_r_use2 != 0 && MEM_r_new == EX_r_use2) ? 1:
+                        (WB_t_new == 0 && EX_r_use2 != 0 && WB_r_new == EX_r_use2)? 2 : 0;
 
 //WB TO MEM
 assign forward_rt_MEM = (WB_t_new == 0 && MEM_r_use2 != 0 && WB_r_new == MEM_r_use2) ? 1 : 0;

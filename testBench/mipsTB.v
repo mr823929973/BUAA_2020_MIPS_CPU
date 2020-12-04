@@ -23,6 +23,9 @@ initial begin
     $dumpfile("mips_test.vcd");
     $dumpvars(0,mipsTB);
     clk = 0;
+    reset = 1;
+    #20
+    reset = 0;
     #2000
     $finish;
 end

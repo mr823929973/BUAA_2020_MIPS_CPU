@@ -11,8 +11,6 @@ module WB (
            input wire [31:0] alu_result_in,
            input wire [31:0] mem_read_data_in,
 
-           output wire [31:0] instructure_out,
-           output wire [5:0] instr_code_out,
            output wire reg_write_en_out,
            output wire [4:0] reg_write_addr_out,
            output wire [31:0] reg_write_data_out
@@ -85,10 +83,7 @@ mux_32b write_r31_data_mux(
 
 assign reg_write_en_out = reg_write;
 assign reg_write_addr_out = reg_write_addr;
-assign reg_write_addr_out = reg_write_data;
-assign instructure_out = instr_code_in;
-assign instr_code_out = instr_code_out;
-
+assign reg_write_data_out = reg_write_data;
 
 
 endmodule

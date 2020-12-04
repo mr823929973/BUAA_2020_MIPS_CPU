@@ -1,3 +1,5 @@
+`ifndef CTRLOR_V
+`define CTRLOR_V
 `include "instr.vh"
 `timescale 1ns / 1ps
 
@@ -168,3 +170,4 @@ always @(*) begin
 end
 
 endmodule
+`endif

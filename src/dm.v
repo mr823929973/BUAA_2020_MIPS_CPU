@@ -1,3 +1,5 @@
+`ifndef DM_V
+`define DM_V
 `include "constant.vh"
 `timescale 1ns / 1ps
 
@@ -36,3 +38,4 @@ end
 assign readData = DM_reg[addr[11:2]];
 
 endmodule
+`endif
