@@ -9,11 +9,15 @@ module mipsTB;
 //input
 reg clk;
 reg reset;
+
+wire [31:0] pc;
 //output
 
 mips UUT(
         .clk(clk),
-        .reset(reset)
+        .reset(reset),
+
+        .pc_test(pc)
     );
 
 
@@ -25,8 +29,9 @@ initial begin
     clk = 0;
     reset = 1;
     #20
+
     reset = 0;
-    #2000
+    while(pc < 32'h0000_4000) #20;
     $finish;
 end
 

@@ -13,7 +13,8 @@
 
 module mips (
            input wire clk,
-           input wire reset
+           input wire reset,
+           output wire[31:0] pc_test
        );
 
 wire stall;
@@ -250,5 +251,7 @@ hazard HAZARD (
            .forward_rt_MEM(forward_rt_MEM_src)
        );
 
+
+assign pc_test = WB_pc;
 
 endmodule

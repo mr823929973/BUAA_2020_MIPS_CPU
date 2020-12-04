@@ -107,7 +107,7 @@ mux_32b alu_result_mux(
 assign pc_out = pc_in;
 assign instructure_out = instructure_in;
 assign instr_code_out = instr_code_in;
-assign reg_read_data2_out = reg_read_data2_in;
+assign reg_read_data2_out = forward_rt_mux_out;
 assign alu_result_out = alu_result;
 
 endmodule

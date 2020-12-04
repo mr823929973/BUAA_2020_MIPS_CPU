@@ -102,9 +102,9 @@ assign forward_rt_EX = (MEM_t_new == 0 && EX_r_use2 != 0 && MEM_r_new == EX_r_us
 assign forward_rt_MEM = (WB_t_new == 0 && MEM_r_use2 != 0 && WB_r_new == MEM_r_use2) ? 1 : 0;
 
 //STALL
-assign stall = ((EX_t_new > ID_t_use1 && ID_r_use1 != 0 && EX_r_new == ID_r_use1) ||
-                (EX_t_new > ID_t_use2 && ID_r_use2 != 0 && EX_r_new == ID_r_use2) ||
-                (MEM_t_new > ID_t_use1 && ID_r_use1 != 0 && MEM_r_new == ID_r_use1) ||
+assign stall = ((EX_t_new > ID_t_use1 && ID_r_use1 != 0 && EX_r_new == ID_r_use1) |
+                (EX_t_new > ID_t_use2 && ID_r_use2 != 0 && EX_r_new == ID_r_use2) |
+                (MEM_t_new > ID_t_use1 && ID_r_use1 != 0 && MEM_r_new == ID_r_use1) |
                 (MEM_t_new > ID_t_use2 && ID_r_use2 != 0 && MEM_r_new == ID_r_use2))? 1 : 0 ;
 
 endmodule
