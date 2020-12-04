@@ -7,6 +7,7 @@
 module IF_ID (
            input wire clk,
            input wire reset,
+           input wire stall,
            input wire[31:0] pc_in,
            input wire[31:0] instructure_in,
            output wire[31:0] pc_out,
@@ -33,6 +34,10 @@ always @(posedge clk) begin
     if(reset) begin
         pc <= `PC_START;
         instructure <= 32'h0000_0000;
+    end
+    else if(stall)begin
+        pc <= pc;
+        instructure <= instructure;
     end
     else begin
         pc <= pc_in;

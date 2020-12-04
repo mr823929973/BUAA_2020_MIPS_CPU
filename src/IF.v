@@ -33,7 +33,7 @@ always @(posedge clk) begin
         PC_Reg <= PC_Reg;
     end
     else if(isBranch) begin
-        PC_Reg <= PC_Reg + 4 + $signed($signed(branchAddr)<<$signed(2));
+        PC_Reg <= PC_Reg + $signed($signed(branchAddr)<<$signed(2));
     end
     else if(isJump) begin
         PC_Reg <= {PC_Reg[31:28],jumpAddr,2'b0};

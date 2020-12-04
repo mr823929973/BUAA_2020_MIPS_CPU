@@ -13,7 +13,8 @@ module WB (
 
            output wire reg_write_en_out,
            output wire [4:0] reg_write_addr_out,
-           output wire [31:0] reg_write_data_out
+           output wire [31:0] reg_write_data_out,
+           output wire [31:0] pc_out
        );
 
 wire reg_dst,write_r31,reg_write,mem_to_reg;
@@ -84,6 +85,6 @@ mux_32b write_r31_data_mux(
 assign reg_write_en_out = reg_write;
 assign reg_write_addr_out = reg_write_addr;
 assign reg_write_data_out = reg_write_data;
-
+assign pc_out = pc_in;
 
 endmodule

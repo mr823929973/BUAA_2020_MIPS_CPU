@@ -52,15 +52,16 @@ ctrlor CTR(
 wire [31:0] alu_src_mux_out;
 wire [4:0] s;
 assign s = instructure_in[10:6];
+wire [31:0] forward_rs_mux_out,forward_rt_mux_out;
 
 mux_32b alu_src_mux(
-            .in0(reg_read_data2_in),
+            .in0(forward_rt_mux_out),
             .in1(extend_imme_in),
             .sel(alu_src),
             .out(alu_src_mux_out)
         );
 
-wire [31:0] forward_rs_mux_out,forward_rt_mux_out;
+
 
 
 mux_32b_4 forward_rs_mux(
@@ -74,7 +75,7 @@ mux_32b_4 forward_rs_mux(
         );
 
 mux_32b_4 forward_rt_mux(
-            .in0(alu_src_mux_out),
+            .in0(reg_read_data2_in),
             .in1(forward_data_MEM),
             .in2(forward_data_WB),
             .in3(32'hxxxx_xxxx),
@@ -88,7 +89,7 @@ wire[31:0] alu_out;
 alu ALU(
         //in
         .srcA(forward_rs_mux_out),
-        .srcB(forward_rt_mux_out),
+        .srcB(alu_src_mux_out),
         .s(s),
         .ALUop(alu_op),
         //out

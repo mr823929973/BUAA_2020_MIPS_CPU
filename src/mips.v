@@ -49,6 +49,7 @@ IF_ID pipeline_IF_ID (
           //in
           .clk(clk),
           .reset(reset),
+          .stall(stall),
           .pc_in(IF_pc),
           .instructure_in(IF_instructure),
           //out
@@ -66,6 +67,7 @@ wire [31:0] ID_extend_imme;
 wire WB_reg_write_en;
 wire [4:0] WB_reg_write_addr;
 wire [31:0] WB_reg_write_data;
+wire [31:0] WB_pc;
 ID pipeline_ID(
        //in
        .clk(clk),
@@ -76,6 +78,7 @@ ID pipeline_ID(
        .reg_write_en(WB_reg_write_en),
        .reg_write_addr(WB_reg_write_addr),
        .reg_write_data(WB_reg_write_data),
+       .WB_pc_in(WB_pc),
        //forward in
        .forward_rs_src(forward_rs_ID_src),
        .forward_rt_src(forward_rt_ID_src),
@@ -222,7 +225,8 @@ WB pipeline_WB(
        //out
        .reg_write_en_out(WB_reg_write_en),
        .reg_write_addr_out(WB_reg_write_addr),
-       .reg_write_data_out(WB_reg_write_data)
+       .reg_write_data_out(WB_reg_write_data),
+       .pc_out(WB_pc)
    );
 
 assign WB_forward_data = WB_reg_write_data;

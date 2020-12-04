@@ -45,7 +45,7 @@ initial begin
 end
 
 always @(posedge clk) begin
-    if(reset || stall) begin
+    if(reset | stall) begin
         pc <= `PC_START;
         instructure <= 32'h0000_0000;
         instr_code <= `nop;

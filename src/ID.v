@@ -14,6 +14,7 @@ module ID (
            input wire reg_write_en,
            input wire[4:0] reg_write_addr,
            input wire[31:0] reg_write_data,
+           input wire[31:0] WB_pc_in,
 
            input wire forward_rs_src,
            input wire forward_rt_src,
@@ -69,7 +70,7 @@ grf GRF(
         .clk(clk),
         .reset(reset),
         .writeEnable(reg_write_en),
-        .PCReg(pc_in),
+        .PCReg(WB_pc_in),
         .readReg1(rs),
         .readReg2(rt),
         .writeReg(reg_write_addr),
@@ -124,7 +125,7 @@ assign branch_addr = extend_imme;
 assign jump_out = jump;
 assign jump_addr = instructure_in[25:0];
 
-assign jump_reg = jump_reg;
+assign jump_reg_out = jump_reg;
 assign jump_reg_addr = reg_read_data1;
 
 
