@@ -15,9 +15,7 @@ wire [31:0] pc;
 
 mips UUT(
         .clk(clk),
-        .reset(reset),
-
-        .pc_test(pc)
+        .reset(reset)
     );
 
 
@@ -29,9 +27,8 @@ initial begin
     clk = 0;
     reset = 1;
     #20
-
     reset = 0;
-    while(pc < 32'h0000_4000) #20;
+    while(UUT.WB_pc < 32'h0000_4000) #20;
     $finish;
 end
 
