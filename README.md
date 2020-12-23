@@ -1,6 +1,6 @@
-# P5
+# P6
 
-### verilog流水线CPU(一)
+### verilog流水线CPU(二)
 
 CPU代码在./src/目录下,TestBench代码在./testBench/目录下
 
