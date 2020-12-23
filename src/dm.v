@@ -30,7 +30,7 @@ always @(posedge clk) begin
         end
     end
     else if(MemWrite) begin
-        DM_reg[addr[11:2]] <= writeData;   
+        DM_reg[addr[13:2]] <= writeData;   
         if(writeData !== 32'hxxxx_xxxx)
         $display("%d@%h: *%h <= %h",$time , PC, addr, writeData);
     end
