@@ -1,10 +1,16 @@
-# P5_Verilog流水线(一)实验文档
+# P6_Verilog流水线(二)实验文档
 
 ## 一、CPU设计方案综述
 
 ### （一）总体设计概述
 
-​	本CPU为Verilog实现的流水线MIPS - CPU，支持的指令集包含**{addu, subu, ori, lw, sw, beq, lui, j, jal, jr, nop,sll}**
+​	本CPU为Verilog实现的流水线MIPS - CPU，支持的指令集为
+
+- MIPS-C3={LB、LBU、LH、LHU、LW、SB、SH、SW、ADD、ADDU、
+  SUB、 SUBU、 MULT、 MULTU、 DIV、 DIVU、 SLL、 SRL、 SRA、 SLLV、
+  SRLV、SRAV、AND、OR、XOR、NOR、ADDI、ADDIU、ANDI、ORI、
+  XORI、LUI、SLT、SLTI、SLTIU、SLTU、BEQ、BNE、BLEZ、BGTZ、
+  BLTZ、BGEZ、J、JAL、JALR、JR、MFHI、MFLO、MTHI、MTLO}
 
 ### （二）关键模块定义
 

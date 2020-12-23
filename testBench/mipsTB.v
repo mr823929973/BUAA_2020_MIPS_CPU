@@ -28,7 +28,7 @@ initial begin
     reset = 1;
     #20
     reset = 0;
-    while(UUT.WB_pc < 32'h0000_4000) #20;
+    while(UUT.WB_pc < 32'h0000_7000) #20;
     $finish;
 end
 
