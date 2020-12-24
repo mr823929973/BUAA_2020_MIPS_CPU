@@ -104,6 +104,29 @@
     t_use1 = 0; \
     t_use2 = 0; \
 
+`define calc_mult \
+    r_new = 0; \
+    r_use1 = rs; \
+    r_use2 = rt; \
+    t_new = 0; \
+    t_use1 = 2; \
+    t_use2 = 2; \
+
+`define mf \
+    r_new = rd; \
+    r_use1 = 0; \
+    r_use2 = 0; \
+    t_new = 2; \
+    t_use1 = 0; \
+    t_use2 = 0; \
+
+`define mt \
+    r_new = 0; \
+    r_use1 = rs; \
+    r_use2 = 0; \
+    t_new = 0; \
+    t_use1 = 2; \
+    t_use2 = 0; \
 
 
 `endif

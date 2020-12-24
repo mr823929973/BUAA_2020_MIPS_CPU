@@ -57,6 +57,21 @@ always @(*) begin
             `branch
         end
 
+        /*calc_mult*/
+        `mult,`multu,`div,`divu: begin
+            `calc_mult
+        end
+
+        /*mf*/
+        `mflo,`mfhi: begin
+            `mf
+        end
+
+        /*mt*/
+        `mtlo,`mthi: begin
+            `mt
+        end
+
         /*others*/
         `lui: begin
             r_new = rt;

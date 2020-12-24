@@ -16,7 +16,7 @@ module mips (
            input wire reset
        );
 
-wire stall;
+wire stall,busy;
 wire [31:0] MEM_forward_data,WB_forward_data;
 wire forward_rs_ID_src, forward_rt_ID_src;
 wire [1:0] forward_rs_EX_src, forward_rt_EX_src;
@@ -127,6 +127,8 @@ wire [31:0] EX_pc,EX_instructure;
 wire [5:0] EX_instr_code;
 wire [31:0] EX_alu_result,EX_reg_read_data2;
 EX pipeline_EX(
+       .reset(reset),
+       .clk(clk),
        //in
        .pc_in(ID_EX_pc),
        .instructure_in(ID_EX_instructure),
@@ -144,7 +146,8 @@ EX pipeline_EX(
        .instructure_out(EX_instructure),
        .instr_code_out(EX_instr_code),
        .alu_result_out(EX_alu_result),
-       .reg_read_data2_out(EX_reg_read_data2)
+       .reg_read_data2_out(EX_reg_read_data2),
+       .busy(busy)
    );
 
 wire [31:0] EX_MEM_pc,EX_MEM_instructure;
@@ -202,7 +205,7 @@ MEM_WB pipeline_MEM_WB(
            //in
            .clk(clk),
            .reset(reset),
-           .pc_in(MEM_pc), 
+           .pc_in(MEM_pc),
            .instructure_in(MEM_instructure),
            .instr_code_in(MEM_instr_code),
            .alu_result_in(MEM_alu_result),
@@ -241,6 +244,7 @@ hazard HAZARD (
            .EX_MEM_instr_code(EX_MEM_instr_code),
            .MEM_WB_instructure_in(MEM_WB_instructure),
            .MEM_WB_instr_code(MEM_WB_instr_code),
+           .busy(busy),
            //out
            .stall(stall),
            .forward_rs_ID(forward_rs_ID_src),

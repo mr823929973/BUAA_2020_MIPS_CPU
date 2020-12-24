@@ -10,6 +10,7 @@ module hazard (
            input wire [5:0] EX_MEM_instr_code,
            input wire [31:0] MEM_WB_instructure_in,
            input wire [5:0] MEM_WB_instr_code,
+           input wire busy,
 
            output wire stall,
            output wire forward_rs_ID,
@@ -21,6 +22,9 @@ module hazard (
 
 wire [4:0] ID_r_new,ID_r_use1,ID_r_use2;
 wire [1:0] ID_t_new,ID_t_use1,ID_t_use2;
+
+wire mult;
+assign mult = (IF_ID_instr_code == `mult || `multu || `div || `divu || `mflo || `mfhi || `mtlo || `mthi) ? 1 : 0;
 
 timeCal R_T_ID(
             //in
@@ -93,18 +97,19 @@ assign forward_rt_ID = (MEM_t_new == 0 && ID_r_use2 != 0 && MEM_r_new == ID_r_us
 
 //MEM and WB TO EX
 assign forward_rs_EX = (MEM_t_new == 0 && EX_r_use1 != 0 && MEM_r_new == EX_r_use1) ? 1:
-                        (WB_t_new == 0 && EX_r_use1 != 0 && WB_r_new == EX_r_use1)? 2 : 0;
+       (WB_t_new == 0 && EX_r_use1 != 0 && WB_r_new == EX_r_use1)? 2 : 0;
 
 assign forward_rt_EX = (MEM_t_new == 0 && EX_r_use2 != 0 && MEM_r_new == EX_r_use2) ? 1:
-                        (WB_t_new == 0 && EX_r_use2 != 0 && WB_r_new == EX_r_use2)? 2 : 0;
+       (WB_t_new == 0 && EX_r_use2 != 0 && WB_r_new == EX_r_use2)? 2 : 0;
 
 //WB TO MEM
 assign forward_rt_MEM = (WB_t_new == 0 && MEM_r_use2 != 0 && WB_r_new == MEM_r_use2) ? 1 : 0;
 
 //STALL
-assign stall = ((EX_t_new > ID_t_use1 && ID_r_use1 != 0 && EX_r_new == ID_r_use1) |
-                (EX_t_new > ID_t_use2 && ID_r_use2 != 0 && EX_r_new == ID_r_use2) |
-                (MEM_t_new > ID_t_use1 && ID_r_use1 != 0 && MEM_r_new == ID_r_use1) |
-                (MEM_t_new > ID_t_use2 && ID_r_use2 != 0 && MEM_r_new == ID_r_use2))? 1 : 0 ;
+assign stall = ((EX_t_new > ID_t_use1 && ID_r_use1 != 0 && EX_r_new == ID_r_use1) ||
+                (EX_t_new > ID_t_use2 && ID_r_use2 != 0 && EX_r_new == ID_r_use2) ||
+                (MEM_t_new > ID_t_use1 && ID_r_use1 != 0 && MEM_r_new == ID_r_use1) ||
+                (MEM_t_new > ID_t_use2 && ID_r_use2 != 0 && MEM_r_new == ID_r_use2) ||
+                 (mult&&busy == 1) )? 1 : 0 ;
 
 endmodule

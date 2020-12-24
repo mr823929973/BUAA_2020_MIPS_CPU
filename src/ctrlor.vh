@@ -96,14 +96,14 @@
     Branch = 0; \
     MemWrite = 0; \
     MemtoReg = 1; \
-    EXTop = 0;\ 
+    EXTop = 0;\
     ALUop = `ALU_ADD; \
     writeR31 = 0; \
     Jump = 0; \
     JumpToReg = 0;\
     MultAns = 0;\
     save = 2'b0; \
-    link = 0; 
+    link = 0;
 
 /*
  * sw
@@ -114,7 +114,7 @@
 `define save_dm \
     RegWrite = 0; \
     RegDst = 0; \
-    ALUSrc = 1;\ 
+    ALUSrc = 1;\
     Branch = 0; \
     MemWrite = 1; \
     MemtoReg = 0; \
@@ -138,8 +138,8 @@
 `define branch \
     RegWrite = 0; \
     RegDst = 0; \
-    ALUSrc = 0; \ 
-    Branch = 1; \ 
+    ALUSrc = 0; \
+    Branch = 1; \
     MemWrite = 0; \
     MemtoReg = 0; \
     EXTop = 0; \
@@ -151,5 +151,68 @@
     load = 3'b0; \
     save = 2'b0; \
     link = 0;
+
+
+/*
+ * mult
+ * multu  
+ * div
+ * divu
+ */
+`define calc_mult \
+    RegWrite = 0;\
+    RegDst = 0;\
+    ALUSrc = 0;\
+    Branch = 0;\
+    MemWrite = 0;\
+    MemtoReg = 0;\
+    EXTop = 0;\
+    writeR31 = 0;\
+    Jump = 0;\
+    JumpToReg = 0;\
+    MultAns = 0;\
+    load = 3'b0; \
+    save = 2'b0; \
+    ALUop =`ALU_AND; 
+
+/*
+ * mfhi
+ * mflo
+ */
+`define mf \
+    RegWrite = 1;\
+    RegDst = 1;\
+    ALUSrc = 0;\
+    Branch = 0;\
+    MemWrite = 0;\
+    MemtoReg = 0;\
+    EXTop = 0;\
+    writeR31 = 0;\
+    Jump = 0;\
+    JumpToReg = 0;\
+    MultAns = 1;\
+    load = 3'b0; \
+    save = 2'b0; \
+    ALUop =`ALU_AND; 
+
+/*
+ * mthi
+ * mtlo
+ */
+`define mt \
+    RegWrite = 0;\
+    RegDst = 0;\
+    ALUSrc = 0;\
+    Branch = 0;\
+    MemWrite = 0;\
+    MemtoReg = 0;\
+    EXTop = 0;\
+    writeR31 = 0;\
+    Jump = 0;\
+    JumpToReg = 0;\
+    MultAns = 0;\
+    load = 3'b0; \
+    save = 2'b0; \
+    ALUop =`ALU_AND; 
 
 `endif

@@ -155,7 +155,7 @@ always @(*) begin
             `load_dm
             load = 3'b101;
         end
-        
+
         /*Type: save_dm*/
         `sw: begin
             `save_dm
@@ -171,11 +171,25 @@ always @(*) begin
         end
 
         /*Type: branch*/
-        `beq,`bne,`blez,`bgtz,`bltz,`bgez:
-        begin
+        `beq,`bne,`blez,`bgtz,`bltz,`bgez: begin
             `branch
         end
-        
+
+        /*Type: calc_mult*/
+        `mult,`multu,`div,`divu: begin
+            `calc_mult
+        end
+
+        /*Type: mf*/
+        `mflo,`mfhi: begin
+            `mf
+        end
+
+        /*Type: mt*/
+        `mtlo,`mthi: begin
+            `mt
+        end
+
         /*Type: others*/
         `lui: begin
             RegWrite = 1;
