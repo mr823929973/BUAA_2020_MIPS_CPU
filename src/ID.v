@@ -123,7 +123,7 @@ branch BRANCH(
            .srcA(reg_read_data1),
            .srcB(reg_read_data2),
 
-           .out(branch_out)
+           .branch_out(branch_out)
        );
 
 assign branch_addr = extend_imme;

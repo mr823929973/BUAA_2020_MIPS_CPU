@@ -47,6 +47,6 @@ always @(posedge clk) begin
 end
 
 assign PC = PC_Reg;
-assign instructure = IM_reg[PC_Reg[13:2]];
+assign instructure = IM_reg[(PC_Reg - `PC_START) >> 2];
 
 endmodule

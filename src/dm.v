@@ -34,38 +34,38 @@ always @(posedge clk) begin
         case (byte_select)
             4'b0001: begin
                 DM_reg[addr[13:2]] <= {DM_reg[addr[13:2]][31:8],writeData[7:0]};
-                if(writeData !== 32'hxxxx_xxxx)
-                    $display("%d@%h: *%h <= %h",$time , PC, addr, DM_reg[addr[13:2]]);
+                if(writeData == writeData)
+                    $display("%d@%h: *%h <= %h",$time , PC, {addr[31:2],2'b0}, {DM_reg[addr[13:2]][31:8],writeData[7:0]});
             end
-            4'b0010:begin
+            4'b0010: begin
                 DM_reg[addr[13:2]] <= {DM_reg[addr[13:2]][31:16],writeData[7:0],DM_reg[addr[13:2]][7:0]};
-                if(writeData !== 32'hxxxx_xxxx)
-                    $display("%d@%h: *%h <= %h",$time , PC, addr, DM_reg[addr[13:2]]);
+                if(writeData == writeData)
+                    $display("%d@%h: *%h <= %h",$time , PC, {addr[31:2],2'b0},{DM_reg[addr[13:2]][31:16],writeData[7:0],DM_reg[addr[13:2]][7:0]});
             end
-            4'b0100:begin
+            4'b0100: begin
                 DM_reg[addr[13:2]] <= {DM_reg[addr[13:2]][31:24],writeData[7:0],DM_reg[addr[13:2]][15:0]};
-                if(writeData !== 32'hxxxx_xxxx)
-                    $display("%d@%h: *%h <= %h",$time , PC, addr, DM_reg[addr[13:2]]);
+                if(writeData == writeData)
+                    $display("%d@%h: *%h <= %h",$time , PC, {addr[31:2],2'b0},{DM_reg[addr[13:2]][31:24],writeData[7:0],DM_reg[addr[13:2]][15:0]});
             end
-            4'b1000:begin
+            4'b1000: begin
                 DM_reg[addr[13:2]] <= {writeData[7:0],DM_reg[addr[13:2]][23:0]};
-                if(writeData !== 32'hxxxx_xxxx)
-                    $display("%d@%h: *%h <= %h",$time , PC, addr, DM_reg[addr[13:2]]);
+                if(writeData == writeData)
+                    $display("%d@%h: *%h <= %h",$time , PC, {addr[31:2],2'b0},{writeData[7:0],DM_reg[addr[13:2]][23:0]});
             end
-            4'b0011:begin
+            4'b0011: begin
                 DM_reg[addr[13:2]] <= {DM_reg[addr[13:2]][31:16],writeData[15:0]};
-                if(writeData !== 32'hxxxx_xxxx)
-                    $display("%d@%h: *%h <= %h",$time , PC, addr, DM_reg[addr[13:2]]);
+                if(writeData == writeData)
+                    $display("%d@%h: *%h <= %h",$time , PC, {addr[31:2],2'b0}, {DM_reg[addr[13:2]][31:16],writeData[15:0]});
             end
-            4'b1100:begin
+            4'b1100: begin
                 DM_reg[addr[13:2]] <= {writeData[15:0],DM_reg[addr[13:2]][15:0]};
-                if(writeData !== 32'hxxxx_xxxx)
-                    $display("%d@%h: *%h <= %h",$time , PC, addr, DM_reg[addr[13:2]]);
+                if(writeData == writeData)
+                    $display("%d@%h: *%h <= %h",$time , PC, {addr[31:2],2'b0}, {writeData[15:0],DM_reg[addr[13:2]][15:0]});
             end
-            4'b1111:begin
+            4'b1111: begin
                 DM_reg[addr[13:2]] <= writeData;
-                if(writeData !== 32'hxxxx_xxxx)
-                    $display("%d@%h: *%h <= %h",$time , PC, addr, DM_reg[addr[13:2]]);
+                if(writeData == writeData)
+                    $display("%d@%h: *%h <= %h",$time , PC, {addr[31:2],2'b0},writeData);
             end
             default:
                 ;
