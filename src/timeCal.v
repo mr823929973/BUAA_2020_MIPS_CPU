@@ -1,4 +1,5 @@
 `include "instr.vh"
+`include "timeCal.vh"
 `timescale 1ns / 1ps
 
 module timeCal (
@@ -20,54 +21,43 @@ assign rd = instructure_in[15:11];
 
 always @(*) begin
     case (instr_code)
-        `addu: begin
-            r_new = rd;
-            r_use1 = rs;
-            r_use2 = rt;
-            t_new = 2;
-            t_use1 = 1;
-            t_use2 = 1;
+
+        /*calc_r*/
+        `add,`addu,`sub,`subu,
+        `_and,`_or,`_xor,`_nor,
+        `slt,`sltu,`sllv,`srlv,
+        `srav: begin
+            `calc_r
         end
-        `subu: begin
-            r_new = rd;
-            r_use1 = rs;
-            r_use2 = rt;
-            t_new = 2;
-            t_use1 = 1;
-            t_use2 = 1;
+
+        /*calc_i*/
+        `addi,`addiu,`andi,`ori,
+        `xori,`slti,`sltiu: begin
+            `calc_i
         end
-        `ori: begin
-            r_new = rt;
-            r_use1 = rs;
-            r_use2 = 0;
-            t_new = 2;
-            t_use1 = 1;
-            t_use2 = 0;
+
+        /*calc_s*/
+        `sll,`srl,`sra: begin
+            `calc_s
         end
-        `lw: begin
-            r_new = rt;
-            r_use1 = rs;
-            r_use2 = 0;
-            t_new = 3;
-            t_use1 = 1;
-            t_use2 = 0;
+
+        /*load_dm*/
+        `lw,`lh,`lb,
+        `lhu,`lbu: begin
+            `load_dm
         end
-        `sw: begin
-            r_new = 0;
-            r_use1 = rs;
-            r_use2 = rt;
-            t_new = 0;
-            t_use1 = 1;
-            t_use2 = 2;
+
+        /*save_dm*/
+        `sw,`sh,`sb: begin
+            `save_dm
         end
-        `beq: begin
-            r_new = 0;
-            r_use1 = rs;
-            r_use2 = rt;
-            t_new = 0;
-            t_use1 = 0;
-            t_use2 = 0;
+
+        `beq,`bne,`blez,
+        `bgtz,`bltz,`bgez: begin
+            `branch
         end
+
+        /*others*/
         `lui: begin
             r_new = rt;
             r_use1 = 0;
@@ -92,14 +82,6 @@ always @(*) begin
             t_use1 = 0;
             t_use2 = 0;
         end
-        `jal: begin
-            r_new = 5'd31;
-            r_use1 = 0;
-            r_use2 = 0;
-            t_new = 2;
-            t_use1 = 0;
-            t_use2 = 0;
-        end
         `jr: begin
             r_new = 0;
             r_use1 = rs;
@@ -108,20 +90,12 @@ always @(*) begin
             t_use1 = 0;
             t_use2 = 0;
         end
-        `sll: begin
+        `jalr: begin
             r_new = rd;
-            r_use1 = 0;
-            r_use2 = rt;
-            t_new = 2;
-            t_use1 = 1;
-            t_use2 = 1;
-        end
-        `andi: begin
-            r_new = rt;
             r_use1 = rs;
             r_use2 = 0;
             t_new = 2;
-            t_use1 = 1;
+            t_use1 = 0;
             t_use2 = 0;
         end
         default: begin

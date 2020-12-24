@@ -1,9 +1,10 @@
 `timescale 1ns / 1ps
+`include "aluctrl.vh"
 
 module alu(
            input wire [31:0] srcA,
            input wire [31:0] srcB,
-           input wire [2:0] ALUop,
+           input wire [3:0] ALUop,
            input wire [4:0] s,
            output wire zero,
            output wire [31:0] ALUout
@@ -15,22 +16,36 @@ assign ALUout = ALUResult;
 
 always @(*) begin
     case (ALUop)
-        3'b000:
+        `ALU_AND:
             ALUResult = srcA & srcB;
-        3'b001:
+        `ALU_OR:
             ALUResult = srcA | srcB;
-        3'b010:
+        `ALU_XOR:
+            ALUResult = srcA ^ srcB;
+        `ALU_NOR:
+            ALUResult = ~(srcA | srcB);
+        `ALU_ADD:
             ALUResult = srcA + srcB;
-        3'b011:
-            ALUResult = srcB << s;
-        3'b100:
-            ALUResult = srcA & (~srcB);
-        3'b101:
-            ALUResult = srcA | (~srcB);
-        3'b110:
+        `ALU_MINU:
             ALUResult = srcA - srcB;
-        3'b111:
+        `ALU_SLL:
+            ALUResult = srcB << s;
+        `ALU_SRL:
+            ALUResult = srcB >> s;
+        `ALU_SRA:
+            ALUResult = $signed($signed(srcB) >>> s);
+        `ALU_SLLV:
+            ALUResult = srcB << srcA[4:0];
+        `ALU_SRLV:
+            ALUResult = srcB >> srcA[4:0];
+        `ALU_SRAV:
+            ALUResult = $signed($signed(srcB) >>> srcA[4:0]);
+        `ALU_LUI:
             ALUResult = srcB << 16;
+        `ALU_SLT:
+            ALUResult = ($signed(srcA) < $signed(srcB)) ? 32'b1 : 32'b0; 
+        `ALU_SLTU:
+            ALUResult = srcA < srcB ? 32'b1 : 32'b0;
         default:
             ;
     endcase

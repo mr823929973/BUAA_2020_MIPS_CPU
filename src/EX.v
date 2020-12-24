@@ -26,8 +26,8 @@ module EX (
            output wire [31:0] reg_read_data2_out
        );
 
-wire [2:0] alu_op;
-wire alu_src,write_r31;
+wire [3:0] alu_op;
+wire alu_src,link;
 wire [31:0] alu_result;
 
 
@@ -43,10 +43,11 @@ ctrlor CTR(
            .MemWrite(),
            .MemtoReg(),
            .EXTop(),
-           .writeR31(write_r31),
+           .writeR31(),
            .Jump(),
            .JumpToReg(),
-           .ALUop(alu_op)
+           .ALUop(alu_op),
+           .link(link)
        );
 
 wire [31:0] alu_src_mux_out;
@@ -100,7 +101,7 @@ alu ALU(
 mux_32b alu_result_mux(
             .in0(alu_out),
             .in1(pc_in + 8),
-            .sel(write_r31),
+            .sel(link),
             .out(alu_result)
         );
 

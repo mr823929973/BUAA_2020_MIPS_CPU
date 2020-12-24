@@ -2,6 +2,7 @@
 `include "ext.v"
 `include "ctrlor.v"
 `include "mux.v"
+`include "branch.v"
 
 `timescale 1ns / 1ps
 
@@ -22,11 +23,11 @@ module ID (
 
            output wire[31:0] pc_out,
            output wire[31:0] instructure_out,
-           output wire[5:0] instr_code_out, 
+           output wire[5:0] instr_code_out,
            output wire [31:0] reg_read_data1_out,
            output wire [31:0] reg_read_data2_out,
            output wire [31:0] extend_imme_out,
-           
+
            output wire branch_out,
            output wire [31:0] branch_addr,
            output wire jump_out,
@@ -36,7 +37,7 @@ module ID (
        );
 
 
-wire ext_op,branch,jump,jump_reg;
+wire ext_op,jump,jump_reg;
 wire [31:0] extend_imme;
 wire [31:0] reg_read_data1,reg_read_data2;
 
@@ -47,7 +48,7 @@ ctrlor CTR(
            .RegWrite(),
            .RegDst(),
            .ALUSrc(),
-           .Branch(branch),
+           .Branch(),
            .MemWrite(),
            .MemtoReg(),
            .EXTop(ext_op),
@@ -117,9 +118,14 @@ assign reg_read_data1_out = reg_read_data1;
 assign reg_read_data2_out = reg_read_data2;
 assign extend_imme_out = extend_imme;
 
+branch BRANCH(
+           .instr_code_in(instr_code_in),
+           .srcA(reg_read_data1),
+           .srcB(reg_read_data2),
 
-assign branch_out = branch &
-       ((reg_read_data1 == reg_read_data2) ? 1'b1 : 1'b0);
+           .out(branch_out)
+       );
+
 assign branch_addr = extend_imme;
 
 assign jump_out = jump;
@@ -131,4 +137,4 @@ assign jump_reg_addr = reg_read_data1;
 
 
 endmodule
-  
+
