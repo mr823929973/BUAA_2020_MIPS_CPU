@@ -55,7 +55,7 @@
     r_use1 = 0; \
     r_use2 = rt; \
     t_new = 2; \
-    t_use1 = 1; \
+    t_use1 = 0; \
     t_use2 = 1;
 
 /*
@@ -78,7 +78,7 @@
  * sw
  * sh
  * sb
- * SHOULD SET SAVE
+ *
  */
 `define save_dm \
     r_new = 0; \
@@ -104,14 +104,24 @@
     t_use1 = 0; \
     t_use2 = 0; \
 
+/*
+ * multu 
+ * mult   
+ * div
+ * divu
+ */
 `define calc_mult \
     r_new = 0; \
     r_use1 = rs; \
     r_use2 = rt; \
     t_new = 0; \
-    t_use1 = 2; \
-    t_use2 = 2; \
+    t_use1 = 1; \
+    t_use2 = 1; \
 
+/*
+ * mflo
+ * mfhi   
+ */
 `define mf \
     r_new = rd; \
     r_use1 = 0; \
@@ -120,12 +130,16 @@
     t_use1 = 0; \
     t_use2 = 0; \
 
+/*
+ * mtlo
+ * mthi   
+ */
 `define mt \
     r_new = 0; \
     r_use1 = rs; \
     r_use2 = 0; \
     t_new = 0; \
-    t_use1 = 2; \
+    t_use1 = 1; \
     t_use2 = 0; \
 
 

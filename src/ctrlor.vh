@@ -30,7 +30,8 @@
     JumpToReg = 0;\
     MultAns = 0;\
     load = 3'b0; \
-    save = 2'b0;
+    save = 2'b0;\
+    link = 0;
 
 
 /*

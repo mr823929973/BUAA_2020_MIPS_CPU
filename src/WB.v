@@ -74,7 +74,7 @@ wire [31:0] reg_write_data;
 
 mux_32b write_r31_data_mux(
             .in0(mem_to_reg_mux_out),
-            .in1(pc_in+8),
+            .in1(mem_to_reg_mux_out),
             .sel(write_r31),
 
             .out(reg_write_data)
