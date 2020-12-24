@@ -87,7 +87,7 @@ always @(*) begin
             instr_reg = `lb;
         6'b100100:
             instr_reg = `lbu;
-        6'b100100:
+        6'b100001:
             instr_reg = `lh;
         6'b100101:
             instr_reg = `lhu;

@@ -24,6 +24,8 @@ always @(*) begin
             branch_out = ($signed(srcA) < $signed(0) ) ? 1'b1 : 1'b0;
         `bgez:
             branch_out = ($signed(srcA) >= $signed(0) ) ? 1'b1 : 1'b0;
+        `bgtz:
+            branch_out = ($signed(srcA) > $signed(0) ) ? 1'b1 : 1'b0;
         default:
             branch_out = 1'b0;
     endcase

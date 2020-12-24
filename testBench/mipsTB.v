@@ -26,9 +26,10 @@ initial begin
     $dumpvars(0,mipsTB);
     clk = 0;
     reset = 1;
-    #20
+    #20;
     reset = 0;
-    while(UUT.WB_pc < 32'h0000_7000) #20;
+    //while(UUT.WB_pc < 32'h0000_7000) #20;
+    #2000;
     $finish;
 end
 
