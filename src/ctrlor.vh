@@ -174,7 +174,8 @@
     MultAns = 0;\
     load = 3'b0; \
     save = 2'b0; \
-    ALUop =`ALU_AND; 
+    ALUop =`ALU_AND; \
+    link = 0;
 
 /*
  * mfhi
@@ -194,7 +195,8 @@
     MultAns = 1;\
     load = 3'b0; \
     save = 2'b0; \
-    ALUop =`ALU_AND; 
+    ALUop =`ALU_AND; \
+    link = 0;
 
 /*
  * mthi
@@ -214,6 +216,7 @@
     MultAns = 0;\
     load = 3'b0; \
     save = 2'b0; \
-    ALUop =`ALU_AND; 
+    ALUop =`ALU_AND;\
+    link = 0;
 
 `endif
