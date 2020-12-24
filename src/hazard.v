@@ -110,6 +110,6 @@ assign stall = ((EX_t_new > ID_t_use1 && ID_r_use1 != 0 && EX_r_new == ID_r_use1
                 (EX_t_new > ID_t_use2 && ID_r_use2 != 0 && EX_r_new == ID_r_use2) ||
                 (MEM_t_new > ID_t_use1 && ID_r_use1 != 0 && MEM_r_new == ID_r_use1) ||
                 (MEM_t_new > ID_t_use2 && ID_r_use2 != 0 && MEM_r_new == ID_r_use2) ||
-                 (mult&&busy == 1) )? 1 : 0 ;
+                 (mult&busy == 1) )? 1 : 0 ;
 
 endmodule

@@ -27,9 +27,10 @@ module EX (
            output wire [5:0] instr_code_out,
            output wire [31:0] alu_result_out,
            output wire [31:0] reg_read_data2_out,
-           output wire busy
+           output wire busy_out
        );
 
+wire busy;
 wire [3:0] alu_op;
 wire alu_src,link;
 wire [31:0] alu_result;
@@ -103,7 +104,7 @@ alu ALU(
         .ALUout(alu_out)
     );
 
-wire [31:0] mdu_out;
+wire [31:0] high,low,mdu_out;
 mdu MDU(
         .clk(clk),
         .reset(reset),
@@ -113,8 +114,11 @@ mdu MDU(
         .instr(instr_code_in),
         //out
         .busy(busy),
-        .ans(mdu_out)
+        .high(high),
+        .low(low)
     );
+assign mdu_out =(instr_code_in == `mflo) ? low :
+                 (instr_code_in == `mfhi) ? high : 0 ;
 
 mux_32b alu_result_mux(
             .in0(alu_out),
@@ -123,6 +127,7 @@ mux_32b alu_result_mux(
             .out(alu_result)
         );
 
+assign busy_out = busy | instr_code_in == `mult | instr_code_in == `multu | instr_code_in == `div | instr_code_in == `divu;
 assign pc_out = pc_in;
 assign instructure_out = instructure_in;
 assign instr_code_out = instr_code_in;

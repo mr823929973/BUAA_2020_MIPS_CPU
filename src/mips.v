@@ -147,7 +147,7 @@ EX pipeline_EX(
        .instr_code_out(EX_instr_code),
        .alu_result_out(EX_alu_result),
        .reg_read_data2_out(EX_reg_read_data2),
-       .busy(busy)
+       .busy_out(busy)
    );
 
 wire [31:0] EX_MEM_pc,EX_MEM_instructure;

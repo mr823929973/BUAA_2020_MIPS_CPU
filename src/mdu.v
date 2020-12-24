@@ -10,16 +10,15 @@ module mdu(
            input wire [31:0] srcB,
            input wire [5:0] instr,
            output wire busy,
-           output reg [31:0] ans
+           output reg [31:0] high,
+           output reg [31:0] low
        );
 
-reg [31:0] high,low;
 reg [3:0] delay;
 initial begin
     high = 32'b0;
     low = 32'b0;
     delay = 4'b0;
-    ans = 32'b0;
 end
 
 assign busy = (delay != 0) ? 1'b1 : 1'b0;
@@ -29,7 +28,6 @@ always @(posedge clk) begin
         high <= 32'b0;
         low <= 32'b0;
         delay <= 4'b0;
-        ans <= 32'b0;
     end
     else begin
         if(delay != 0) begin
@@ -54,12 +52,6 @@ always @(posedge clk) begin
                 high = srcA % srcB;
                 low = srcA / srcB;
                 delay <= 10;
-            end
-            `mflo:begin
-                ans <= low;
-            end
-            `mfhi:begin
-                ans <= high;
             end
             `mtlo:begin
                 low <= srcA;
