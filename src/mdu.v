@@ -44,19 +44,31 @@ always @(posedge clk) begin
                 delay <= 5;
             end
             `div: begin
-                high = $signed(srcA) % $signed(srcB);
-                low = $signed(srcA) / $signed(srcB);
+                if(srcB != 32'b0) begin
+                    high <= $signed(srcA) % $signed(srcB);
+                    low <= $signed(srcA) / $signed(srcB);
+                end
+                else begin
+                    high <= 32'b0;
+                    low <= 32'b0;
+                end
                 delay <= 10;
             end
             `divu: begin
-                high = srcA % srcB;
-                low = srcA / srcB;
+                if(srcB != 32'b0) begin
+                    high = srcA % srcB;
+                    low = srcA / srcB;
+                end
+                else begin
+                    high <= 32'b0;
+                    low <= 32'b0;
+                end
                 delay <= 10;
             end
-            `mtlo:begin
+            `mtlo: begin
                 low <= srcA;
             end
-            `mthi:begin
+            `mthi: begin
                 high <= srcA;
             end
             default:
